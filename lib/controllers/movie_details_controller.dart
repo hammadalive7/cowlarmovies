@@ -1,4 +1,6 @@
 import 'package:get/get.dart';
+import '../constants/api/keys.dart';
+import '../constants/api/tmbd_api.dart';
 import '../models/movie_model.dart';
 import '../repositories/movie_details_repo.dart';
 import 'package:http/http.dart' as http;
@@ -31,8 +33,8 @@ class MovieDetailsController extends GetxController {
   }
 
   Future<void> getMovieTrailer(String movieID) async {
-    String baseUrl = 'https://api.themoviedb.org/3/movie/';
-    String movieVideos = '/videos?api_key=ae753c450aeeb54164711d62838ed214';
+    String baseUrl = '${TMDbApi.baseUrl}/movie/';
+    String movieVideos = '/videos?api_key=${Key.apiKey}';
     final url = Uri.parse(baseUrl + movieID + movieVideos);
     final response = await http.get(url);
     if (response.statusCode == 200) {

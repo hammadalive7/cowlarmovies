@@ -1,6 +1,7 @@
 
 const String appName='Cowlar Movies';
 const String trendingMovies='Trending Movies';
+const String upcomingMovies='Upcoming Movies';
 const String wentWrong='Something Went Wrong';
 const String nowPlayingMovies='Now Playing';
 const String topRatedMovies='Top Rated';

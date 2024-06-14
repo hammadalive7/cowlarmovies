@@ -5,8 +5,8 @@ import 'package:cowlarmovies/views/screens/common_components/trending_movie_hori
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 
-import '../home_screen/movie_list_horizontal.dart';
-import 'movie_list_horizontal_shimmer_skeleton.dart';
+import 'movie_grid_vertical.dart';
+import '../../common_components/movie_horizontal_list_shimmer_skeleton.dart';
 
 class TrendingMovies extends StatelessWidget {
   const TrendingMovies({super.key});

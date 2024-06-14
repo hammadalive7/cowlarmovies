@@ -8,6 +8,7 @@ import '../../theme/theme.dart';
 import '../common_components/movie_card.dart';
 import '../common_components/movie_list_shimmer_skeleton.dart';
 import '../common_components/process_genre_code.dart';
+import '../movie_details_screen/movie_details_screen.dart';
 
 
 class SearchMoviesScreen extends StatelessWidget {
@@ -137,14 +138,14 @@ class SearchMoviesScreen extends StatelessWidget {
                                               movie.genreIds),
                                       movieTime: movie.runtime.toString(),
                                       onTap: () {
-                                        // Navigator.push(
-                                        //   context,
-                                        //   MaterialPageRoute(
-                                        //     builder: (context) => MovieDetailsScreen(
-                                        //       movieId: movie.id,
-                                        //     ),
-                                        //   ),
-                                        // );
+                                        Navigator.push(
+                                          context,
+                                          MaterialPageRoute(
+                                            builder: (context) => MovieDetailsScreen(
+                                              movieId: movie.id,
+                                            ),
+                                          ),
+                                        );
                                       },
                                     );
                                   },

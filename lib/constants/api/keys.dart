@@ -1,4 +1,6 @@
 
+import 'package:flutter_dotenv/flutter_dotenv.dart';
+
 class Key {
-  static const String apiKey = 'ae753c450aeeb54164711d62838ed214';
+  static String apiKey = dotenv.env['APIKEY']!;
 }

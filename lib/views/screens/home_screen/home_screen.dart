@@ -2,18 +2,24 @@ import 'package:cowlarmovies/controllers/navigation_controller.dart';
 import 'package:cowlarmovies/models/trending_movies.dart';
 import 'package:cowlarmovies/models/upcoming_movies.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter/widgets.dart';
+import '../../../constants/category_data.dart';
 import '../../../constants/strings.dart';
 import 'package:get/get.dart';
+import '../../../controllers/home_controller.dart';
 import '../../../controllers/now_playing_controller.dart';
 import '../../../controllers/top_rated_controller.dart';
 import '../../../controllers/trending_controller.dart';
 import '../../../controllers/upcoming_controller.dart';
 import '../../../models/now_playing_movies.dart';
 import '../../../models/top_rated_movies.dart';
-import '../common_components/movie_list_horizontal_shimmer_skeleton.dart';
-import '../common_components/trending_movies.dart';
+import '../common_components/movie_category_grid_shimmer_skeleton.dart';
+import '../common_components/movie_horizontal_list_shimmer_skeleton.dart';
+import 'components/trending_movies.dart';
 import '../navigation/navigation_screen.dart';
-import 'movie_list_horizontal.dart';
+import 'components/categories_category_item.dart';
+import 'components/categories_category_list.dart';
+import 'components/movie_grid_vertical.dart';
 
 class HomeScreen extends StatelessWidget {
   const HomeScreen({
@@ -25,7 +31,7 @@ class HomeScreen extends StatelessWidget {
     final width = MediaQuery.sizeOf(context).width;
     final height = MediaQuery.sizeOf(context).height;
 
-    // final HomeScreenController controller = Get.find<HomeScreenController>();
+    final HomeController homeController = Get.find<HomeController>();
     final NavigationController navController = Get.find<NavigationController>();
     final NowPlayingMoviesController nowPlayingController =
         Get.find<NowPlayingMoviesController>();
@@ -45,7 +51,7 @@ class HomeScreen extends StatelessWidget {
           child: SizedBox(
             width: double.infinity,
             child: SingleChildScrollView(
-              child: Column(
+              child: Obx(() => Column(
                 crossAxisAlignment: CrossAxisAlignment.start,
                 children: [
                   SizedBox(
@@ -98,20 +104,14 @@ class HomeScreen extends StatelessWidget {
                     height: 20,
                   ),
                   const TrendingMovies(),
-                  Row(
-                    mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                    children: [
-                      Text(
-                        trendingMovies,
-                        style: Theme.of(context).textTheme.headlineSmall,
-                      ),
-                    ],
-                  ),
-                  FutureBuilder<TrendingMoviesResponse>(
+                  const CategoriesList(),
+
+                  if(homeController.category.value == trendingMovies)
+                    FutureBuilder<TrendingMoviesResponse>(
                     future: trendingController.trendingMoviesList.value,
                     builder: (context, snapshot) {
                       if (snapshot.connectionState == ConnectionState.waiting) {
-                        return const HorizontalMovieListShimmerEffect();
+                        return const GridMovieListShimmerEffect();
                       } else if (snapshot.hasError) {
                         return Center(
                           child: Text(
@@ -121,7 +121,7 @@ class HomeScreen extends StatelessWidget {
                         );
                       } else if (snapshot.hasData) {
                         final homeScreenResponse = snapshot.data!;
-                        return HorizontalMoviesList(
+                        return VerticalMoviesGrid(
                           movies: homeScreenResponse.results,
                         );
                       } else {
@@ -134,23 +134,13 @@ class HomeScreen extends StatelessWidget {
                       }
                     },
                   ),
-                  SizedBox(
-                    height: height * 0.01,
-                  ),
-                  Row(
-                    mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                    children: [
-                      Text(
-                        upcomingMovies,
-                        style: Theme.of(context).textTheme.headlineSmall,
-                      ),
-                    ],
-                  ),
-                  FutureBuilder<UpcomingMoviesResponse>(
+
+                  if(homeController.category.value == upcomingMovies)
+                    FutureBuilder<UpcomingMoviesResponse>(
                     future: upcomingController.upcomingMoviesList.value,
                     builder: (context, snapshot) {
                       if (snapshot.connectionState == ConnectionState.waiting) {
-                        return const HorizontalMovieListShimmerEffect();
+                        return const GridMovieListShimmerEffect();
                       } else if (snapshot.hasError) {
                         return Center(
                           child: Text(
@@ -160,7 +150,7 @@ class HomeScreen extends StatelessWidget {
                         );
                       } else if (snapshot.hasData) {
                         final homeScreenResponse = snapshot.data!;
-                        return HorizontalMoviesList(
+                        return VerticalMoviesGrid(
                           movies: homeScreenResponse.results,
                         );
                       } else {
@@ -173,23 +163,12 @@ class HomeScreen extends StatelessWidget {
                       }
                     },
                   ),
-                  SizedBox(
-                    height: height * 0.01,
-                  ),
-                  Row(
-                    mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                    children: [
-                      Text(
-                        nowPlayingMovies,
-                        style: Theme.of(context).textTheme.headlineSmall,
-                      ),
-                    ],
-                  ),
-                  FutureBuilder<NowPlayingMoviesResponse>(
+                  if(homeController.category.value == nowPlayingMovies)
+                    FutureBuilder<NowPlayingMoviesResponse>(
                     future: nowPlayingController.nowPlayingMoviesList.value,
                     builder: (context, snapshot) {
                       if (snapshot.connectionState == ConnectionState.waiting) {
-                        return const HorizontalMovieListShimmerEffect();
+                        return const GridMovieListShimmerEffect();
                       } else if (snapshot.hasError) {
                         return Center(
                           child: Text(
@@ -199,7 +178,7 @@ class HomeScreen extends StatelessWidget {
                         );
                       } else if (snapshot.hasData) {
                         final homeScreenResponse = snapshot.data!;
-                        return HorizontalMoviesList(
+                        return VerticalMoviesGrid(
                           movies: homeScreenResponse.results,
                         );
                       } else {
@@ -212,23 +191,13 @@ class HomeScreen extends StatelessWidget {
                       }
                     },
                   ),
-                  SizedBox(
-                    height: height * 0.01,
-                  ),
-                  Row(
-                    mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                    children: [
-                      Text(
-                        topRatedMovies,
-                        style: Theme.of(context).textTheme.headlineSmall,
-                      ),
-                    ],
-                  ),
-                  FutureBuilder<TopRatedMoviesResponse>(
+
+                  if(homeController.category.value == topRatedMovies)
+                    FutureBuilder<TopRatedMoviesResponse>(
                     future: topRatedController.topRatedMoviesList.value,
                     builder: (context, snapshot) {
                       if (snapshot.connectionState == ConnectionState.waiting) {
-                        return const HorizontalMovieListShimmerEffect();
+                        return const GridMovieListShimmerEffect();
                       } else if (snapshot.hasError) {
                         return Center(
                           child: Text(
@@ -238,7 +207,7 @@ class HomeScreen extends StatelessWidget {
                         );
                       } else if (snapshot.hasData) {
                         final homeScreenResponse = snapshot.data!;
-                        return HorizontalMoviesList(
+                        return VerticalMoviesGrid(
                           movies: homeScreenResponse.results,
                         );
                       } else {
@@ -257,6 +226,6 @@ class HomeScreen extends StatelessWidget {
           ),
         ),
       ),
-    );
+    ));
   }
 }

@@ -1,7 +1,9 @@
 import 'dart:core';
+import 'package:flutter_dotenv/flutter_dotenv.dart';
+
 import 'keys.dart';
 
 class TMDbApi{
-  static const baseUrl = "https://api.themoviedb.org/3";
-  static const apiKey = Key.apiKey;
+  static String baseUrl = dotenv.env['BASEURL']!;
+  static String apiKey = Key.apiKey;
 }

@@ -5,6 +5,7 @@ import '../../../constants/assets.dart';
 import '../../../helpers/process_image_link.dart';
 import '../../../models/movie_model.dart';
 import '../../theme/theme.dart';
+import '../movie_details_screen/movie_details_screen.dart';
 
 class TrendingHorizontalMoviesList extends StatelessWidget {
   final List<Movie> movies;
@@ -39,15 +40,15 @@ class TrendingHorizontalMoviesList extends StatelessWidget {
                 const EdgeInsets.symmetric(horizontal: 8.0, vertical: 10.0),
             child: InkWell(
               onTap: () {
-                // Navigator.push(
-                //   context,
-                //   MaterialPageRoute(
-                //     builder: (context) =>
-                //         MovieDetailsScreen(
-                //           movieId: movie.id,
-                //         ),
-                //   ),
-                // );
+                Navigator.push(
+                  context,
+                  MaterialPageRoute(
+                    builder: (context) =>
+                        MovieDetailsScreen(
+                          movieId: movie.id,
+                        ),
+                  ),
+                );
               },
               child: Stack(
                 children: [

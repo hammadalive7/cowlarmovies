@@ -8,6 +8,8 @@ import 'bindings/search_movie_binding.dart';
 import 'bindings/top_rated_binding.dart';
 import 'bindings/trending_binding.dart';
 import 'constants/strings.dart';
+import 'controllers/home_controller.dart';
+import 'controllers/movie_details_controller.dart';
 import 'controllers/navigation_controller.dart';
 
 void main() {
@@ -27,6 +29,8 @@ class MyApp extends StatelessWidget {
       theme: theme(),
       initialBinding: BindingsBuilder(() {
         Get.lazyPut(() => NavigationController());
+        Get.lazyPut(() => HomeController());
+        Get.lazyPut(() => MovieDetailsController());
         TopRatedBinding().dependencies();
         NowPlayingBinding().dependencies();
         SearchMovieBinding().dependencies();

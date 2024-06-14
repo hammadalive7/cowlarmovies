@@ -1,25 +1,19 @@
 import 'package:get/get.dart';
 import '../models/search_movies.dart';
+import '../repositories/search_movie_repo.dart';
 import '../services/client/base_client.dart';
 
-abstract class SearchMovieRepo {
-  Future<SearchMovieResponse> searchMovieWithKeywords(String keywords,int pageNumber);
-}
 
-class SearchMoviesController extends GetxController implements SearchMovieRepo {
+
+class SearchMoviesController extends GetxController {
+
+  final HttpSearchMovieRepo _searchMovieRepo;
+
+  SearchMoviesController(this._searchMovieRepo);
 
   var searchMovieResponse = Rxn<Future<SearchMovieResponse>>();
   var pageNumber = 1.obs;
   var keywords = ''.obs;
-
-  @override
-  Future<SearchMovieResponse> searchMovieWithKeywords(String keywords,int pageNumber) async {
-    SearchMovieResponse searchMovieWithKeywordResponse;
-    final String uri = '/search/movie?query=$keywords&language=en-US&page=$pageNumber&include_adult=false';
-    final Map<String, dynamic> response = await BaseClient().get(uri);
-    searchMovieWithKeywordResponse = SearchMovieResponse.fromJson(response);
-    return searchMovieWithKeywordResponse;
-  }
 
   void updateKeywords(String newKeywords) {
     keywords(newKeywords);
@@ -27,14 +21,17 @@ class SearchMoviesController extends GetxController implements SearchMovieRepo {
     fetchSearchMovies();
   }
 
-  // void updatePageNumber(int newPageNumber) {
-  //   pageNumber(newPageNumber);
-  //   fetchSearchMovies();
-  // }
-
   Future<void> fetchSearchMovies() async {
-    searchMovieResponse.value =  searchMovieWithKeywords(
+    searchMovieResponse.value =  _searchMovieRepo.searchMovieWithKeywords(
         keywords.value, pageNumber.value);
+  }
+
+  @override
+  void onClose() {
+    super.onClose();
+    searchMovieResponse.value = null;
+    pageNumber.value = 1;
+    keywords.value = '';
   }
 
   //dispose
@@ -44,7 +41,6 @@ class SearchMoviesController extends GetxController implements SearchMovieRepo {
     searchMovieResponse.value = null;
     pageNumber.value = 1;
     keywords.value = '';
-
   }
 
 

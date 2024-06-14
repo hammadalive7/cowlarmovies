@@ -5,9 +5,10 @@ import '../../../controllers/search_controller.dart';
 import '../../../helpers/process_image_link.dart';
 import '../../../models/search_movies.dart';
 import '../../theme/theme.dart';
-import '../components_shared/movie_card.dart';
-import '../components_shared/movie_list_shimmer_skeleton.dart';
-import '../components_shared/process_genre_code.dart';
+import '../common_components/movie_card.dart';
+import '../common_components/movie_list_shimmer_skeleton.dart';
+import '../common_components/process_genre_code.dart';
+
 
 class SearchMoviesScreen extends StatelessWidget {
   const SearchMoviesScreen({Key? key}) : super(key: key);

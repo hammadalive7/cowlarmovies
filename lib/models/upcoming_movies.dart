@@ -27,3 +27,4 @@ class UpcomingMoviesResponse {
 
   Map<String, dynamic> toJson() => _$UpcomingMoviesResponseToJson(this);
 }
+

@@ -8,8 +8,7 @@ class MovieCard extends StatelessWidget {
   final String moviePoster;
   final String movieReleaseDate;
   final String movieRating;
-  final String movieTime;
-  final List<String> movieGenres;
+  final List<String>? movieGenres;
   final Function() onTap;
 
   const MovieCard({
@@ -18,8 +17,7 @@ class MovieCard extends StatelessWidget {
     required this.moviePoster,
     required this.movieReleaseDate,
     required this.movieRating,
-    required this.movieGenres,
-    required this.movieTime,
+    this.movieGenres,
     required this.onTap,
   });
 
@@ -28,6 +26,8 @@ class MovieCard extends StatelessWidget {
     final textTheme = Get.theme.textTheme;
     final height = MediaQuery.sizeOf(context).height;
     final width = MediaQuery.sizeOf(context).width;
+
+    // print("""movieGenres: $movieGenres""");
 
     return Padding(
       padding: const EdgeInsets.symmetric(vertical: 8.0),
@@ -103,7 +103,7 @@ class MovieCard extends StatelessWidget {
                         ),
                         const SizedBox(width: 5),
                         Text(
-                          movieGenres.isEmpty ? "" : movieGenres[0].toString(),
+                          movieGenres == null ? '' : movieGenres!.first,
                           style: textTheme.titleSmall!.copyWith(
                             color: Colors.grey,
                           ),
@@ -125,24 +125,7 @@ class MovieCard extends StatelessWidget {
                         ),
                       ],
                     ),
-                    const SizedBox(height: 5),
-                    Row(
-                      mainAxisAlignment: MainAxisAlignment.start,
-                      children: [
-                        const Icon(
-                          Icons.watch_later_outlined,
-                          color: Colors.grey,
-                          size: 16,
-                        ),
-                        const SizedBox(width: 5),
-                        Text(
-                          movieTime.toString(),
-                          style: textTheme.titleSmall!.copyWith(
-                            color: Colors.grey,
-                          ),
-                        ),
-                      ],
-                    ),
+
 
                   ],
                 ),

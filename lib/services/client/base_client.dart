@@ -12,7 +12,7 @@ class BaseClient {
 
   Future<Map<String, dynamic>> get(String api) async {
     final url = '$_baseUrl$api&api_key=$_apiKey';
-    print(url);
+    // print(url);
     try {
       final response = await http
           .get(Uri.parse(url))

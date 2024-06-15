@@ -50,4 +50,13 @@ class MovieDetailsController extends GetxController {
       throw Exception('Failed to load movie videos.');
     }
   }
+
+  //on close
+  @override
+  void onClose() {
+    super.onClose();
+    trailerYouTubeID.value = '';
+    movieTrailer.clear();
+  }
+
 }

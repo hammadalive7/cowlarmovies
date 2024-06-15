@@ -1,10 +1,8 @@
 
-
+import 'package:flutter/material.dart';
 import 'package:get/get.dart';
-
 import '../models/trending_movies.dart';
 import '../repositories/trending_movies_repo.dart';
-import '../services/client/base_client.dart';
 
 
 
@@ -33,7 +31,7 @@ class TrendingMoviesController extends GetxController {
       isLoading(true);
       trendingMoviesList.value = httpTrendingMoviesRepo.getTrendingMoviesResponse(start);
     } catch (e) {
-      print('Error fetching movies: $e');
+      debugPrint('Error fetching movies: $e');
     } finally {
       isLoading(false);
     }

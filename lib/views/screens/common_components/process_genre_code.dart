@@ -1,8 +1,8 @@
 class ProcessGenreCode {
   static List<String> processGenreCodes(List<int>? genreCodes) {
     List<String> genres = [];
-    if (genreCodes == null) {
-      return ['loading...'];
+    if (genreCodes == null || genreCodes.isEmpty) {
+      return ['N/A'];
     }
     for (var genreCode in genreCodes) {
       genres.add(processGenreCode(genreCode.toString()));

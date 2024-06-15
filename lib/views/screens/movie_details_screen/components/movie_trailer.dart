@@ -34,6 +34,7 @@ class _MovieTrailerState extends State<MovieTrailer> {
     );
   }
 
+
   @override
   Widget build(BuildContext context) {
     return FutureBuilder(
@@ -149,7 +150,8 @@ class _MovieTrailerState extends State<MovieTrailer> {
 
   @override
   void dispose() {
-    _controller.dispose();
     super.dispose();
+    controller.onClose();
+    _controller.dispose();
   }
 }

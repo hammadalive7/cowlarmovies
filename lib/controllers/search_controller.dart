@@ -1,9 +1,6 @@
 import 'package:get/get.dart';
 import '../models/search_movies.dart';
 import '../repositories/search_movie_repo.dart';
-import '../services/client/base_client.dart';
-
-
 
 class SearchMoviesController extends GetxController {
 
@@ -36,8 +33,8 @@ class SearchMoviesController extends GetxController {
 
   //dispose
   @override
-  void onDispose() {
-    super.onClose();
+  void dispose() {
+    super.dispose();
     searchMovieResponse.value = null;
     pageNumber.value = 1;
     keywords.value = '';

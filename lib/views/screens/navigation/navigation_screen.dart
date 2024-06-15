@@ -8,7 +8,7 @@ import '../search_movies/search_movies.dart';
 import 'components/navigation_bottom_bar.dart';
 
 class NavigationScreen extends StatefulWidget {
-  const NavigationScreen({Key? key}) : super(key: key);
+  const NavigationScreen({super.key});
 
   @override
   State<NavigationScreen> createState() => _NavigationScreenState();
@@ -21,7 +21,7 @@ class _NavigationScreenState extends State<NavigationScreen> {
   final List<Widget> _pageList = [
     const HomeScreen(),
     const SearchMoviesScreen(),
-     FavoriteMoviesGrid(),
+     const FavoriteMoviesGrid(),
     const HomeScreen(),
     const HomeScreen(),
   ];

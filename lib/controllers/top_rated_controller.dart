@@ -1,9 +1,6 @@
-import 'package:flutter/material.dart';
 import 'package:get/get.dart';
-
 import '../models/top_rated_movies.dart';
 import '../repositories/top_rated_movies_repo.dart';
-import '../services/client/base_client.dart';
 
 class TopRatedMoviesController extends GetxController {
 
@@ -26,7 +23,7 @@ class TopRatedMoviesController extends GetxController {
       topRatedMoviesList.value =
           httpTopRatedMoviesRepo.getTopRatedMoviesResponse(start);
     } catch (e) {
-      print('Error fetching movies: $e');
+      // debugPrint('Error fetching movies: $e');
     } finally {
       isLoading(false);
     }

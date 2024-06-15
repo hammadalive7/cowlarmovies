@@ -19,11 +19,10 @@ class MovieDetailsScreen extends StatelessWidget {
   final String moviePosterPath;
 
   const MovieDetailsScreen(
-      {Key? key,
+      {super.key,
       required this.movieId,
       required this.movieName,
-      required this.moviePosterPath})
-      : super(key: key);
+      required this.moviePosterPath});
 
   @override
   Widget build(BuildContext context) {

@@ -16,6 +16,8 @@ class FavoriteMoviesGrid extends StatelessWidget {
     ),
   );
 
+  const FavoriteMoviesGrid({super.key});
+
   @override
   Widget build(BuildContext context) {
     final favoritesController = Get.put(FavoritesController());
@@ -64,7 +66,7 @@ class FavoriteMoviesGrid extends StatelessWidget {
                           builder: (context) => MovieDetailsScreen(
                             movieId: movie.id,
                             movieName: movie.title,
-                            moviePosterPath: movie.posterPath ?? '',
+                            moviePosterPath: movie.posterPath,
                           ),
                         ),
                       );

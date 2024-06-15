@@ -1,8 +1,6 @@
-import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import '../models/now_playing_movies.dart';
 import '../repositories/now_playing_movies_repo.dart';
-import '../services/client/base_client.dart';
 
 
 class NowPlayingMoviesController extends GetxController
@@ -27,7 +25,7 @@ class NowPlayingMoviesController extends GetxController
       isLoading(true);
       nowPlayingMoviesList.value = nowPlayingMoviesRepo.getNowPlayingMoviesResponse(start);
     } catch (e) {
-      print('Error fetching movies: $e');
+      // print('Error fetching movies: $e');
     } finally {
       isLoading(false);
     }

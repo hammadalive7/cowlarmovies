@@ -1,5 +1,7 @@
 import 'package:cowlarmovies/bindings/upcoming_binding.dart';
+import 'package:cowlarmovies/services/shared_preferences.dart';
 import 'package:cowlarmovies/views/screens/navigation/navigation_screen.dart';
+import 'package:cowlarmovies/views/screens/splash_screen/splash_screen.dart';
 import 'package:cowlarmovies/views/theme/theme.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_dotenv/flutter_dotenv.dart';
@@ -25,6 +27,16 @@ Future<void> main() async {
 class MyApp extends StatelessWidget {
   const MyApp({super.key});
 
+  Future<Widget> checkIfOpenedBefore() async {
+    bool openedBefore = await SharedPreferenceServiceImpl().ifOpenedBefore();
+    if (openedBefore) {
+      return const NavigationScreen();
+    } else {
+      await SharedPreferenceServiceImpl().setOpenedBeforeTrue();
+      return const SplashScreen();
+    }
+  }
+
   @override
   Widget build(BuildContext context) {
     return GetMaterialApp(
@@ -43,7 +55,20 @@ class MyApp extends StatelessWidget {
         Get.lazyPut(() => FavoritesController());
 
       }),
-      home: NavigationScreen(),
+      home: FutureBuilder(
+        future: checkIfOpenedBefore(),
+        builder: (context, snapshot) {
+          if (snapshot.hasData) {
+            return snapshot.data as Widget;
+          } else {
+            return const Center(
+              child: CircularProgressIndicator(
+                color: darkAccent,
+              ),
+            );
+          }
+        },
+      ),
     );
   }
 }

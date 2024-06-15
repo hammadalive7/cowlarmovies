@@ -3,9 +3,11 @@ import 'package:get/get.dart';
 
 
 class MQTTController extends GetxController {
+
   final _appConnectionState = MQTTConnectionState.disconnected.obs;
   final _receivedText = ''.obs;
   final _historyText = ''.obs;
+
 
   void setReceivedText(String text) {
     _receivedText.value = text;
@@ -16,7 +18,10 @@ class MQTTController extends GetxController {
     _appConnectionState.value = state;
   }
 
-  String get receivedText => _receivedText.value;
-  String get historyText => _historyText.value;
-  MQTTConnectionState get appConnectionState => _appConnectionState.value;
+  String get getReceivedText => _receivedText.value;
+  String get getHistoryText => _historyText.value;
+  MQTTConnectionState get getAppConnectionState => _appConnectionState.value;
+
+
+
 }

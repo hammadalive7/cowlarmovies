@@ -43,7 +43,6 @@ class BluetoothController extends GetxController {
 
   Future<void> _fetchPairedDevices() async {
     try {
-
       List<BluetoothDevice> devices = await FlutterBluePlus.bondedDevices;
       pairedDevices.value = devices;
     } catch (e) {

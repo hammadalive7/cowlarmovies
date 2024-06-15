@@ -1,4 +1,5 @@
 import 'package:cowlarmovies/bindings/upcoming_binding.dart';
+import 'package:cowlarmovies/controllers/mqtt_controller.dart';
 import 'package:cowlarmovies/services/shared_preferences.dart';
 import 'package:cowlarmovies/views/screens/navigation/navigation_screen.dart';
 import 'package:cowlarmovies/views/screens/splash_screen/splash_screen.dart';
@@ -45,17 +46,17 @@ class MyApp extends StatelessWidget {
       title: appName,
       theme: theme(),
       initialBinding: BindingsBuilder(() {
-        Get.lazyPut(() => NavigationController());
+        Get.put(NavigationController());
         Get.lazyPut(() => HomeController());
         Get.lazyPut(() => MovieDetailsController());
+        Get.lazyPut(() => MQTTController());
+        Get.lazyPut(() => FavoritesController());
+        Get.lazyPut(() => BluetoothController());
         TopRatedBinding().dependencies();
         NowPlayingBinding().dependencies();
         SearchMovieBinding().dependencies();
         TrendingBinding().dependencies();
         UpcomingMovieBinding().dependencies();
-        Get.lazyPut(() => FavoritesController());
-        Get.lazyPut(() => BluetoothController());
-
       }),
       home: FutureBuilder(
         future: checkIfOpenedBefore(),

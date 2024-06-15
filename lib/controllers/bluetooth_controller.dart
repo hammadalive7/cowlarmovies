@@ -1,4 +1,5 @@
 import 'dart:async';
+import 'package:flutter/material.dart';
 import 'package:flutter_blue_plus/flutter_blue_plus.dart';
 import 'package:get/get.dart';
 import 'package:permission_handler/permission_handler.dart';
@@ -20,9 +21,11 @@ class BluetoothController extends GetxController {
             _fetchPairedDevices();
           } else {
             Get.snackbar("Error", "Permissions not granted");
-            print("Permissions not granted");
+            debugPrint("Permissions not granted");
           }
         });
+      } else if (state == BluetoothAdapterState.off) {
+        pairedDevices.clear();
       }
     });
   }
@@ -40,10 +43,11 @@ class BluetoothController extends GetxController {
 
   Future<void> _fetchPairedDevices() async {
     try {
+
       List<BluetoothDevice> devices = await FlutterBluePlus.bondedDevices;
       pairedDevices.value = devices;
     } catch (e) {
-      print("Error fetching paired devices: $e");
+      debugPrint("Error fetching paired devices: $e");
     }
   }
 

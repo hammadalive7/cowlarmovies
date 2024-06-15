@@ -13,10 +13,10 @@ class GridMovieListShimmerEffect extends StatelessWidget {
     return GridView.builder(
       shrinkWrap: true,
       physics: const BouncingScrollPhysics(),
-      itemCount: 9, // 3 rows * 3 columns
+      itemCount: 9,
       gridDelegate: SliverGridDelegateWithFixedCrossAxisCount(
-        crossAxisCount: 3, // 3 items per row
-        childAspectRatio: (width * 0.4) / (height * 0.25), // Adjust the item height
+        crossAxisCount: 3,
+        childAspectRatio: (width * 0.4) / (height * 0.25),
       ),
       itemBuilder: (context, index) {
         return Padding(

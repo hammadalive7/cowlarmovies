@@ -1,3 +1,4 @@
+import 'package:cowlarmovies/views/screens/mqtt_screen/mqtt_screen.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import '../../../constants/utils.dart';
@@ -22,9 +23,9 @@ class _NavigationScreenState extends State<NavigationScreen> {
   final List<Widget> _pageList = [
     const HomeScreen(),
     const SearchMoviesScreen(),
-     const FavoriteMoviesGrid(),
-     BluetoothScreen(),
-    const HomeScreen(),
+    const FavoriteMoviesGrid(),
+    BluetoothScreen(),
+    const MQTTScreen(),
   ];
 
   @override

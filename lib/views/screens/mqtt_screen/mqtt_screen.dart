@@ -224,7 +224,7 @@ class _MQTTScreenState extends State<MQTTScreen> {
   void _publishMessage(String text) {
     String osPrefix = 'hammadalive';
 
-    final String message = osPrefix + ': ' + text;
+    final String message = '$osPrefix: $text';
     manager.publish(message);
     _messageTextController.clear();
   }

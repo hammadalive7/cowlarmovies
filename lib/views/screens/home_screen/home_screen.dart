@@ -1,27 +1,16 @@
-import 'package:cowlarmovies/controllers/navigation_controller.dart';
-import 'package:cowlarmovies/models/trending_movies.dart';
-import 'package:cowlarmovies/models/upcoming_movies.dart';
+
 import 'package:cowlarmovies/views/screens/home_screen/components/popular_movies.dart';
 import 'package:cowlarmovies/views/screens/home_screen/components/search_movies.dart';
 import 'package:cowlarmovies/views/screens/home_screen/components/top_rated_movies.dart';
 import 'package:cowlarmovies/views/screens/home_screen/components/upcoming_movies.dart';
-import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import '../../../constants/strings.dart';
 import 'package:get/get.dart';
 import '../../../controllers/home_controller.dart';
-import '../../../controllers/now_playing_controller.dart';
-import '../../../controllers/top_rated_controller.dart';
 import '../../../controllers/trending_controller.dart';
-import '../../../controllers/upcoming_controller.dart';
-import '../../../models/now_playing_movies.dart';
-import '../../../models/top_rated_movies.dart';
-import '../common_components/movie_category_grid_shimmer_skeleton.dart';
 import 'components/now_playing_movies.dart';
 import 'components/trending_movies.dart';
-import '../navigation/navigation_screen.dart';
 import 'components/categories_category_list.dart';
-import 'components/movie_grid_vertical.dart';
 
 class HomeScreen extends StatelessWidget {
   const HomeScreen({

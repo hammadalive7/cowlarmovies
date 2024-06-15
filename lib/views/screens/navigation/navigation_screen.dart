@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import '../../../constants/utils.dart';
 import '../../../controllers/navigation_controller.dart';
+import '../fav_movie_screen/fav_movies_screen.dart';
 import '../home_screen/home_screen.dart';
 import '../search_movies/search_movies.dart';
 import 'components/navigation_bottom_bar.dart';
@@ -20,7 +21,7 @@ class _NavigationScreenState extends State<NavigationScreen> {
   final List<Widget> _pageList = [
     const HomeScreen(),
     const SearchMoviesScreen(),
-    const HomeScreen(),
+     FavoriteMoviesGrid(),
     const HomeScreen(),
     const HomeScreen(),
   ];

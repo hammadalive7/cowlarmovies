@@ -46,6 +46,8 @@ class TrendingHorizontalMoviesList extends StatelessWidget {
                     builder: (context) =>
                         MovieDetailsScreen(
                           movieId: movie.id,
+                          moviePosterPath: movie.posterPath ?? '',
+                          movieName: movie.title,
                         ),
                   ),
                 );

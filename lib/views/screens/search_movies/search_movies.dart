@@ -143,6 +143,8 @@ class SearchMoviesScreen extends StatelessWidget {
                                           MaterialPageRoute(
                                             builder: (context) => MovieDetailsScreen(
                                               movieId: movie.id,
+                                              movieName: movie.title,
+                                              moviePosterPath: movie.posterPath ?? '',
                                             ),
                                           ),
                                         );

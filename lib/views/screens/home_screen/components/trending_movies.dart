@@ -4,8 +4,6 @@ import 'package:cowlarmovies/models/trending_movies.dart';
 import 'package:cowlarmovies/views/screens/common_components/trending_movie_horizontal_list.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
-
-import 'movie_grid_vertical.dart';
 import '../../common_components/movie_horizontal_list_shimmer_skeleton.dart';
 
 class TrendingMovies extends StatelessWidget {

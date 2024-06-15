@@ -10,16 +10,33 @@ import '../common_components/movie_list_shimmer_skeleton.dart';
 import '../common_components/process_genre_code.dart';
 import '../movie_details_screen/movie_details_screen.dart';
 
+class SearchMoviesScreen extends StatefulWidget {
+  const SearchMoviesScreen({super.key});
 
-class SearchMoviesScreen extends StatelessWidget {
-  const SearchMoviesScreen({Key? key}) : super(key: key);
+  @override
+  State<SearchMoviesScreen> createState() => _SearchMoviesScreenState();
+}
+
+class _SearchMoviesScreenState extends State<SearchMoviesScreen> {
+  late SearchMoviesController controller;
+
+  @override
+  void initState() {
+    super.initState();
+    controller = Get.find<SearchMoviesController>();
+  }
+
+  @override
+  void dispose() {
+    super.dispose();
+    controller.onClose();
+  }
 
   @override
   Widget build(BuildContext context) {
     final textTheme = Get.theme.textTheme;
     final width = MediaQuery.of(context).size.width;
-    final SearchMoviesController controller =
-        Get.find<SearchMoviesController>();
+
     final searchBarController = TextEditingController();
 
     return Scaffold(
@@ -31,12 +48,12 @@ class SearchMoviesScreen extends StatelessWidget {
           ),
         ],
         title: Text(
-            "Search",
-            style: textTheme.headlineMedium!.copyWith(
-              color: Colors.white,
-              fontSize: 20,
-            ),
+          "Search",
+          style: textTheme.headlineMedium!.copyWith(
+            color: Colors.white,
+            fontSize: 20,
           ),
+        ),
         centerTitle: true,
       ),
       body: Padding(
@@ -135,14 +152,17 @@ class SearchMoviesScreen extends StatelessWidget {
                                       movieRating: movie.voteAverage.toString(),
                                       movieGenres:
                                           ProcessGenreCode.processGenreCodes(
-                                              movie.genreIds),
-                                      movieTime: movie.runtime.toString(),
+                                              movie.genreIds ?? []),
                                       onTap: () {
                                         Navigator.push(
                                           context,
                                           MaterialPageRoute(
-                                            builder: (context) => MovieDetailsScreen(
+                                            builder: (context) =>
+                                                MovieDetailsScreen(
                                               movieId: movie.id,
+                                              movieName: movie.title,
+                                              moviePosterPath:
+                                                  movie.posterPath ?? '',
                                             ),
                                           ),
                                         );

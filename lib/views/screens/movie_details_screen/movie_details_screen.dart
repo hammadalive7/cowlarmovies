@@ -1,3 +1,5 @@
+import 'package:cowlarmovies/controllers/fav_movie_controller.dart';
+import 'package:cowlarmovies/models/fav_movie_model.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import '../../../constants/assets.dart';
@@ -13,14 +15,19 @@ import 'components/movie_trailer.dart';
 
 class MovieDetailsScreen extends StatelessWidget {
   final int movieId;
+  final String movieName;
+  final String moviePosterPath;
 
-
-  const MovieDetailsScreen({Key? key, required this.movieId}) : super(key: key);
+  const MovieDetailsScreen(
+      {super.key,
+      required this.movieId,
+      required this.movieName,
+      required this.moviePosterPath});
 
   @override
   Widget build(BuildContext context) {
-    final controller =
-        Get.put(MovieDetailsController()); // Instantiate the controller
+    final controller = Get.put(MovieDetailsController());
+    final favController = Get.find<FavoritesController>();
 
     final textTheme = Get.context!.textTheme;
     double height = MediaQuery.of(context).size.height;
@@ -38,7 +45,7 @@ class MovieDetailsScreen extends StatelessWidget {
             return Center(
               child: Text(
                 wentWrong,
-                style: textTheme!.titleMedium,
+                style: textTheme.titleMedium,
               ),
             );
           } else {
@@ -46,13 +53,37 @@ class MovieDetailsScreen extends StatelessWidget {
             return CustomScrollView(
               slivers: [
                 SliverAppBar(
+                  actions: [
+                    Padding(
+                      padding: const EdgeInsets.only(right: 8.0),
+                      child: Container(
+                        decoration: const BoxDecoration(
+                          color: Colors.black38,
+                          borderRadius: BorderRadius.all(
+                            Radius.circular(50),
+                          ),
+                        ),
+                        child: IconButton(
+                          icon: const Icon(Icons.bookmark),
+                          onPressed: () {
+                            favController.addFavorite(FavMovie(
+                              id: movieId,
+                              title: movieName,
+                              posterPath: moviePosterPath,
+                            ));
+                          },
+                        ),
+                      ),
+                    ),
+                  ],
                   expandedHeight: height * 0.4,
                   flexibleSpace: FlexibleSpaceBar(
-                    title: Text(
-                      movie.title,
-                      style: textTheme.titleMedium,
-                    ),
-                    centerTitle: true,
+                    // title: Text(
+                    //   movie.title,
+                    //   style: textTheme.titleMedium,
+                    // ),
+                    // centerTitle: true,
+
                     background: FadeInImage.assetNetwork(
                       placeholder: placeholder,
                       image: ProcessImage.processPosterLink(
@@ -67,52 +98,58 @@ class MovieDetailsScreen extends StatelessWidget {
                   delegate: SliverChildListDelegate(
                     [
                       Container(
-                        width: width,
-                        decoration: BoxDecoration(
-                          color: dark[800],
-                          borderRadius: const BorderRadius.only(
-                            topLeft: Radius.circular(20),
-                            topRight: Radius.circular(20),
+                          width: width,
+                          decoration: BoxDecoration(
+                            color: dark[800],
+                            borderRadius: const BorderRadius.only(
+                              topLeft: Radius.circular(20),
+                              topRight: Radius.circular(20),
+                            ),
                           ),
-                        ),
-                        child: Padding(
-                          padding: const EdgeInsets.symmetric(
-                            horizontal: 6,
-                            vertical: 20,
-                          ),
-                          child: Obx(() => Column(
-                            mainAxisAlignment: MainAxisAlignment.start,
-                            crossAxisAlignment: CrossAxisAlignment.start,
-                            children: [
-                              const SizedBox(width: double.infinity),
-                              MovieTileWithRating(
-                                posterPath: movie.posterPath,
-                                originalTitle: movie.originalTitle,
-                                genres: movie.genres,
-                                releaseDate: movie.releaseDate,
-                                voteAverage: movie.voteAverage,
-                                movieTime: movie.runtime,
-                              ),
-                              SizedBox(height: height * 0.02),
-                              const DetailCategoriesList(),
-                              SizedBox(height: height * 0.01),
-                              if (controller.category.value == "About Movie")
-                                Padding(
-                                  padding: const EdgeInsets.only(left: 10.0),
-                                  child: Text(
-                                    movie.overview,
-                                    style: textTheme.titleSmall,
+                          child: Padding(
+                            padding: const EdgeInsets.symmetric(
+                              horizontal: 6,
+                              vertical: 20,
+                            ),
+                            child: Obx(
+                              () => Column(
+                                mainAxisAlignment: MainAxisAlignment.start,
+                                crossAxisAlignment: CrossAxisAlignment.start,
+                                children: [
+                                  const SizedBox(width: double.infinity),
+                                  MovieTileWithRating(
+                                    posterPath: movie.posterPath,
+                                    originalTitle: movie.originalTitle,
+                                    genres: movie.genres,
+                                    releaseDate: movie.releaseDate,
+                                    voteAverage: movie.voteAverage,
+                                    movieTime: movie.runtime,
                                   ),
-                                ),
-                              if (controller.category.value == "Trailer")
-                                Padding(
-                                  padding: const EdgeInsets.only(left: 10.0),
-                                  child: MovieTrailer(movieID: movie.id.toString(), movie: movie,)
-                                ),
-                            ],
-                          ),
-                        ),
-                        )),
+                                  SizedBox(height: height * 0.02),
+                                  const DetailCategoriesList(),
+                                  SizedBox(height: height * 0.01),
+                                  if (controller.category.value ==
+                                      "About Movie")
+                                    Padding(
+                                      padding:
+                                          const EdgeInsets.only(left: 10.0),
+                                      child: Text(
+                                        movie.overview,
+                                        style: textTheme.titleSmall,
+                                      ),
+                                    ),
+                                  if (controller.category.value == "Trailer")
+                                    Padding(
+                                        padding:
+                                            const EdgeInsets.only(left: 10.0),
+                                        child: MovieTrailer(
+                                          movieID: movie.id.toString(),
+                                          movie: movie,
+                                        )),
+                                ],
+                              ),
+                            ),
+                          )),
                     ],
                   ),
                 ),

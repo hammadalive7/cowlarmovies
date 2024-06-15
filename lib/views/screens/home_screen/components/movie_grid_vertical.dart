@@ -9,7 +9,7 @@ import '../../movie_details_screen/movie_details_screen.dart';
 class VerticalMoviesGrid extends StatelessWidget {
   final List<Movie> movies;
 
-  VerticalMoviesGrid({super.key, required this.movies});
+  const VerticalMoviesGrid({super.key, required this.movies});
 
   static final customCacheManager = CacheManager(
     Config(
@@ -21,8 +21,8 @@ class VerticalMoviesGrid extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    double width = MediaQuery.sizeOf(context).width;
-    double height = MediaQuery.sizeOf(context).height;
+    // double width = MediaQuery.sizeOf(context).width;
+    // double height = MediaQuery.sizeOf(context).height;
 
     return SizedBox(
       // height: 200,
@@ -49,6 +49,8 @@ class VerticalMoviesGrid extends StatelessWidget {
                     builder: (context) =>
                         MovieDetailsScreen(
                           movieId: movie.id,
+                          movieName: movie.title,
+                          moviePosterPath: movie.posterPath ?? '',
                         ),
                   ),
                 );

@@ -4,13 +4,12 @@ import 'package:flutter_cache_manager/flutter_cache_manager.dart';
 import '../../../constants/assets.dart';
 import '../../../helpers/process_image_link.dart';
 import '../../../models/movie_model.dart';
-import '../../theme/theme.dart';
 import '../movie_details_screen/movie_details_screen.dart';
 
 class TrendingHorizontalMoviesList extends StatelessWidget {
   final List<Movie> movies;
 
-  TrendingHorizontalMoviesList({super.key, required this.movies});
+  const TrendingHorizontalMoviesList({super.key, required this.movies});
 
   static final customCacheManager = CacheManager(
     Config(
@@ -46,6 +45,8 @@ class TrendingHorizontalMoviesList extends StatelessWidget {
                     builder: (context) =>
                         MovieDetailsScreen(
                           movieId: movie.id,
+                          moviePosterPath: movie.posterPath ?? '',
+                          movieName: movie.title,
                         ),
                   ),
                 );

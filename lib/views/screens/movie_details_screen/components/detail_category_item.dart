@@ -1,10 +1,5 @@
-import 'package:cowlarmovies/constants/category_data.dart';
-import 'package:cowlarmovies/controllers/home_controller.dart';
-import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
-import 'package:flutter/services.dart';
 import 'package:get/get.dart';
-
 import '../../../../constants/details_list_data.dart';
 import '../../../../controllers/movie_details_controller.dart';
 

@@ -2,12 +2,13 @@ import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import '../../../constants/utils.dart';
 import '../../../controllers/navigation_controller.dart';
+import '../fav_movie_screen/fav_movies_screen.dart';
 import '../home_screen/home_screen.dart';
 import '../search_movies/search_movies.dart';
 import 'components/navigation_bottom_bar.dart';
 
 class NavigationScreen extends StatefulWidget {
-  const NavigationScreen({Key? key}) : super(key: key);
+  const NavigationScreen({super.key});
 
   @override
   State<NavigationScreen> createState() => _NavigationScreenState();
@@ -20,7 +21,7 @@ class _NavigationScreenState extends State<NavigationScreen> {
   final List<Widget> _pageList = [
     const HomeScreen(),
     const SearchMoviesScreen(),
-    const HomeScreen(),
+     const FavoriteMoviesGrid(),
     const HomeScreen(),
     const HomeScreen(),
   ];

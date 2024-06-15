@@ -15,7 +15,7 @@ class NavigationBottomBar extends StatelessWidget {
       // margin: const EdgeInsets.all(16.0),
       padding: const EdgeInsets.symmetric(horizontal: 12.0),
       decoration: BoxDecoration(
-        color: Color(0xFF242A32),
+        color: const Color(0xFF242A32),
         // color border top border
         border: Border.lerp(
           const Border(

@@ -1,7 +1,6 @@
 import 'package:cowlarmovies/constants/mqtt_states.dart';
 import 'package:get/get.dart';
 
-
 class MQTTController extends GetxController {
 
   final _appConnectionState = MQTTConnectionState.disconnected.obs;
@@ -21,7 +20,5 @@ class MQTTController extends GetxController {
   String get getReceivedText => _receivedText.value;
   String get getHistoryText => _historyText.value;
   MQTTConnectionState get getAppConnectionState => _appConnectionState.value;
-
-
 
 }

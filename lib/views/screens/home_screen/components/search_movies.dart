@@ -1,4 +1,3 @@
-
 import 'package:cowlarmovies/controllers/navigation_controller.dart';
 import 'package:cowlarmovies/views/screens/navigation/navigation_screen.dart';
 import 'package:flutter/material.dart';
@@ -11,7 +10,7 @@ class SearchMovies extends StatelessWidget {
   Widget build(BuildContext context) {
     final NavigationController navController = Get.find<NavigationController>();
 
-    return                   InkWell(
+    return InkWell(
       onTap: () {
         navController.changeScreen(1);
         Navigator.push(
@@ -23,14 +22,13 @@ class SearchMovies extends StatelessWidget {
       child: TextFormField(
         enabled: false,
         style: Theme.of(context).textTheme.titleMedium?.copyWith(
-          color: Colors.white,
-        ),
+              color: Colors.white,
+            ),
         decoration: InputDecoration(
           hintText: 'Search',
-          hintStyle:
-          Theme.of(context).textTheme.titleMedium?.copyWith(
-            color: Colors.grey[400],
-          ),
+          hintStyle: Theme.of(context).textTheme.titleMedium?.copyWith(
+                color: Colors.grey[400],
+              ),
           suffixIcon: const Icon(
             Icons.search,
             color: Color(0xFFBDBDBD),

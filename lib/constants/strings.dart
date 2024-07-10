@@ -1,5 +1,5 @@
 
-const String appName='Cowlar Movies';
+const String appName='Movie Arena';
 const String trendingMovies='Popular';
 const String upcomingMovies='Upcoming';
 const String wentWrong='Something Went Wrong';

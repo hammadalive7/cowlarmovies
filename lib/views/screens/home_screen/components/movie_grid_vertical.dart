@@ -14,8 +14,8 @@ class VerticalMoviesGrid extends StatelessWidget {
   static final customCacheManager = CacheManager(
     Config(
       'customCacheKey',
-      stalePeriod: const Duration(days: 2),
-      maxNrOfCacheObjects: 200,
+      stalePeriod: const Duration(days: 5),
+      maxNrOfCacheObjects: 100,
     ),
   );
 

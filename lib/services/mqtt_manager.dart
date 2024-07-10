@@ -72,6 +72,8 @@ class MQTTManager {
       final String pt =
       MqttPublishPayload.bytesToStringAsString(recMess.payload.message);
       _currentState.setReceivedText(pt);
+      _currentState.handleReceivedMessage(pt);
+
     });
   }
 

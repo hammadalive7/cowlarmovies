@@ -23,7 +23,7 @@ class HomeScreen extends StatelessWidget {
     final height = MediaQuery.sizeOf(context).height;
 
     final HomeController homeController = Get.find<HomeController>();
-    final trendingController = Get.find<TrendingMoviesController>();
+    homeController.subscribeCowlarTopic();
 
     return Scaffold(
         body: SafeArea(
@@ -48,8 +48,8 @@ class HomeScreen extends StatelessWidget {
                           style: Theme.of(context).textTheme.headlineSmall),
                       //refresh icon
                       GestureDetector(
-                          onTap: () {
-                            trendingController.onInit();
+                          onTap: () async {
+                            await homeController.publishMessage('refresh');
                           },
                           child: const Icon(
                             Icons.refresh,

@@ -12,11 +12,8 @@ class MQTTScreen extends StatefulWidget {
 }
 
 class _MQTTScreenState extends State<MQTTScreen> {
-  final TextEditingController _messageTextController = TextEditingController();
-  final TextEditingController _topicTextController = TextEditingController();
+
   late MQTTController controller;
-  late MQTTManager manager;
-  String host = 'test.mosquitto.org';
 
   @override
   void initState() {
@@ -24,15 +21,8 @@ class _MQTTScreenState extends State<MQTTScreen> {
   }
 
   @override
-  void dispose() {
-    _messageTextController.dispose();
-    _topicTextController.dispose();
-    super.dispose();
-  }
-
-  @override
   Widget build(BuildContext context) {
-    controller = Get.put(MQTTController());
+    controller = Get.find<MQTTController>();
 
     return Scaffold(
         appBar: AppBar(
@@ -54,7 +44,7 @@ class _MQTTScreenState extends State<MQTTScreen> {
                         height: MediaQuery.of(context).size.height * 0.07,
                         child: TextField(
                           style: const TextStyle(color: Colors.white),
-                          controller: _topicTextController,
+                          controller: controller.topicTextController,
                           decoration: const InputDecoration(
                               prefixStyle: TextStyle(color: Colors.white),
                               border: OutlineInputBorder(
@@ -87,12 +77,12 @@ class _MQTTScreenState extends State<MQTTScreen> {
                             onPressed: () {
                               if (controller.getAppConnectionState ==
                                   MQTTConnectionState.connected) {
-                                _disconnect();
+                                controller.disconnect();
                                 Get.snackbar('Success', 'MQTT disconnected');
                               } else if (controller.getAppConnectionState ==
                                   MQTTConnectionState.disconnected) {
-                                if (_topicTextController.text.isNotEmpty) {
-                                  _configureAndConnect();
+                                if (controller.topicTextController.text.isNotEmpty) {
+                                  controller.configureAndConnect(controller.topicTextController.text);
                                   Get.snackbar('Success', 'MQTT connected');
                                 } else {
                                   Get.snackbar('Error', 'Please enter a topic');
@@ -116,7 +106,7 @@ class _MQTTScreenState extends State<MQTTScreen> {
                         height: MediaQuery.of(context).size.height * 0.07,
                         child: TextField(
                           style: const TextStyle(color: Colors.white),
-                          controller: _messageTextController,
+                          controller: controller.messageTextController,
                           decoration: const InputDecoration(
                               prefixStyle: TextStyle(color: Colors.white),
                               border: OutlineInputBorder(
@@ -149,8 +139,8 @@ class _MQTTScreenState extends State<MQTTScreen> {
                             onPressed: () {
                               if (controller.getAppConnectionState ==
                                       MQTTConnectionState.connected &&
-                                  _messageTextController.text.isNotEmpty) {
-                                _publishMessage(_messageTextController.text);
+                                  controller.messageTextController.text.isNotEmpty) {
+                                controller.publishMessage(controller.messageTextController.text);
                               } else {
                                 if (controller.getAppConnectionState !=
                                     MQTTConnectionState.connected) {
@@ -203,29 +193,5 @@ class _MQTTScreenState extends State<MQTTScreen> {
         ));
   }
 
-  void _configureAndConnect() {
-    // ignore: flutter_style_todos
-    // TODO: Use UUID
-    String osPrefix = 'hammadalive';
 
-    manager = MQTTManager(
-        host: host,
-        topic: _topicTextController.text,
-        identifier: osPrefix,
-        state: controller);
-    manager.initializeMQTTClient();
-    manager.connect();
-  }
-
-  void _disconnect() {
-    manager.disconnect();
-  }
-
-  void _publishMessage(String text) {
-    String osPrefix = 'hammadalive';
-
-    final String message = '$osPrefix: $text';
-    manager.publish(message);
-    _messageTextController.clear();
-  }
 }

@@ -65,7 +65,7 @@ class _SearchMoviesScreenState extends State<SearchMoviesScreen> {
               TextField(
                 keyboardType: TextInputType.text,
                 controller: searchBarController,
-                onSubmitted: (value) {
+                onChanged: (value) {
                   controller.updateKeywords(value);
                 },
                 style: textTheme.titleMedium!.copyWith(

@@ -6,7 +6,7 @@ import '../../../controllers/bluetooth_controller.dart';
 class BluetoothScreen extends StatelessWidget {
   BluetoothScreen({super.key});
 
-  final controller = Get.put(BluetoothController());
+  final controller = Get.find<BluetoothController>();
 
   @override
   Widget build(BuildContext context) {
